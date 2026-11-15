@@ -1,0 +1,1435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Entraînement permis mer</title>
+  <style>
+    :root {
+      --bg: #0b132b;
+      --surface: #1c2541;
+      --surface-card: #223055;
+      --border: #3a506b;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0284c7;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --star: #fbbf24;
+    }
+    .light {
+      --bg: #f1f5f9;
+      --surface: #ffffff;
+      --surface-card: #f8fafc;
+      --border: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --accent: #0284c7;
+      --accent-hover: #0369a1;
+      --success: #059669;
+      --warning: #d97706;
+      --danger: #dc2626;
+      --star: #d97706;
+    }
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      line-height: 1.5;
+      transition: background-color 0.2s, color 0.2s;
+    }
+    /* Header */
+    header {
+      background-color: var(--surface);
+      border-bottom: 1px solid var(--border);
+      padding: 0.75rem 1.25rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-title-box {
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .header-title-box h1 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--accent);
+    }
+    .header-badge {
+      font-size: 0.7rem;
+      background-color: var(--accent);
+      color: #0b132b;
+      font-weight: 700;
+      padding: 0.15rem 0.45rem;
+      border-radius: 1rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .top-controls {
+      display: flex;
+      gap: 0.5rem;
+      align-items: center;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.45rem 0.85rem;
+      border-radius: 0.5rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background-color: var(--surface);
+      color: var(--text);
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .btn:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+    }
+    .btn-accent {
+      background-color: var(--accent);
+      color: #0b132b;
+      border-color: var(--accent);
+    }
+    .btn-accent:hover {
+      background-color: var(--accent-hover);
+      color: #ffffff;
+      border-color: var(--accent-hover);
+    }
+    .btn-active {
+      background-color: var(--accent);
+      color: #0b132b;
+      border-color: var(--accent);
+    }
+    .container {
+      max-width: 1000px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 1.25rem;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    /* Filters Bar */
+    .filter-section {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .filter-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .pill {
+      padding: 0.35rem 0.75rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 2rem;
+      background-color: var(--surface-card);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .pill:hover {
+      border-color: var(--accent);
+      color: var(--text);
+    }
+    .pill.active {
+      background-color: var(--accent);
+      color: #0b132b;
+      border-color: var(--accent);
+      font-weight: 700;
+    }
+    /* Stats & Progress */
+    .stats-bar {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 0.6rem;
+    }
+    .stat-card {
+      background-color: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 0.5rem;
+      padding: 0.6rem 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+      cursor: pointer;
+      transition: all 0.15s ease-in-out;
+      user-select: none;
+    }
+    .stat-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.25);
+    }
+    .stat-card.active {
+      border-color: var(--accent);
+      background-color: rgba(56, 189, 248, 0.15);
+      box-shadow: 0 0 0 2px var(--accent);
+    }
+    .stat-card.active .stat-label {
+      color: var(--accent);
+      font-weight: 700;
+    }
+    .stat-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .stat-val {
+      font-size: 1.25rem;
+      font-weight: 700;
+    }
+    .progress-bar-container {
+      width: 100%;
+      height: 12px;
+      background-color: var(--surface-card);
+      border-radius: 6px;
+      overflow: hidden;
+      display: flex;
+      margin-top: 0.35rem;
+      border: 1px solid var(--border);
+    }
+    .progress-chunk {
+      height: 100%;
+      transition: width 0.3s ease;
+    }
+    .bg-mastered { background-color: var(--success); }
+    .bg-hesitant { background-color: var(--warning); }
+    .bg-review { background-color: var(--danger); }
+
+    /* Interactive Lexicon Word Highlighting */
+    .lex-word {
+      border-bottom: 2px dotted var(--accent);
+      cursor: pointer;
+      transition: all 0.15s ease;
+      border-radius: 3px;
+      padding: 0 2px;
+      font-weight: inherit;
+    }
+    .lex-word:hover {
+      background-color: rgba(56, 189, 248, 0.22);
+      color: var(--accent);
+      border-bottom: 2px solid var(--accent);
+    }
+
+    /* Main Flashcard Card */
+    .card-view {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+    .flashcard {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      padding: 1.75rem;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      min-height: 380px;
+      position: relative;
+    }
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 0.85rem;
+    }
+    .section-tag {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent);
+      background-color: var(--fr-bg);
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.4rem;
+      border: 1px solid var(--fr-border);
+    }
+    .star-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.25rem;
+      color: var(--star);
+      font-weight: 700;
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      background: rgba(251, 191, 36, 0.15);
+      border: 1px solid rgba(251, 191, 36, 0.3);
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.4rem;
+    }
+    .star-tag.vertiefung {
+      color: var(--text-muted);
+      background: rgba(148, 163, 184, 0.1);
+      border-color: var(--border);
+    }
+    .status-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      padding: 0.25rem 0.6rem;
+      border-radius: 0.4rem;
+    }
+    .status-0 { background: var(--surface-card); color: var(--text-muted); }
+    .status-1 { background: rgba(239, 68, 68, 0.2); color: var(--danger); border: 1px solid var(--danger); }
+    .status-2 { background: rgba(245, 158, 11, 0.2); color: var(--warning); border: 1px solid var(--warning); }
+    .status-3 { background: rgba(16, 185, 129, 0.2); color: var(--success); border: 1px solid var(--success); }
+
+    /* Question Box */
+    .question-container {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+    .q-de-box {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+    }
+    .q-de {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.35;
+      flex: 1;
+    }
+    .answer-container {
+      margin-top: 0.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      border-top: 1px dashed var(--border);
+      padding-top: 1.25rem;
+      animation: slideDown 0.25s ease-out;
+    }
+    .a-de-box {
+      background-color: var(--surface-card);
+      border: 1px solid var(--border);
+      padding: 1.1rem;
+      border-radius: 0.75rem;
+    }
+    .a-de-box .a-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--success);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+    .a-de {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+      white-space: pre-line;
+    }
+
+    /* Knot Image Comparison Box */
+    .knot-image-box {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: center;
+    }
+    .knot-image-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .knot-img {
+      max-width: 100%;
+      max-height: 420px;
+      object-fit: contain;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 10px -2px rgba(0, 0, 0, 0.4);
+      background-color: #1e293b;
+    }
+
+    /* Official Sign in Question Box */
+    .q-image-box {
+      margin: 1rem auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: rgba(15, 23, 42, 0.5);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 0.9rem;
+      max-width: 320px;
+    }
+    .q-image-title {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      text-align: center;
+    }
+    .sign-frame {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #ffffff;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+    }
+    .q-sign-img {
+      max-width: 140px;
+      max-height: 140px;
+      width: auto;
+      height: auto;
+      display: block;
+    }
+
+    /* Action Controls & Rating */
+    .action-controls {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-top: auto;
+    }
+    .rating-buttons {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.6rem;
+    }
+    .btn-rate {
+      padding: 0.65rem;
+      border-radius: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.2rem;
+      transition: all 0.15s;
+      border: 1px solid transparent;
+      user-select: none;
+    }
+    .btn-rate .sub {
+      font-size: 0.7rem;
+      font-weight: normal;
+      opacity: 0.8;
+    }
+    .rate-danger { background: rgba(239, 68, 68, 0.15); color: var(--danger); border-color: rgba(239, 68, 68, 0.4); }
+    .rate-danger:hover { background: var(--danger); color: white; }
+    .rate-warning { background: rgba(245, 158, 11, 0.15); color: var(--warning); border-color: rgba(245, 158, 11, 0.4); }
+    .rate-warning:hover { background: var(--warning); color: white; }
+    .rate-success { background: rgba(16, 185, 129, 0.15); color: var(--success); border-color: rgba(16, 185, 129, 0.4); }
+    .rate-success:hover { background: var(--success); color: white; }
+
+    /* Navigation Bar */
+    .nav-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+    }
+    .shortcuts-hint {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+    .kbd {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 0.25rem;
+      padding: 0.1rem 0.35rem;
+      font-family: monospace;
+      font-size: 0.75rem;
+    }
+
+    /* Table / List View */
+    .list-view {
+      display: none;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      overflow-x: auto;
+    }
+    .search-bar {
+      width: 100%;
+      padding: 0.6rem 0.85rem;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      background: var(--surface-card);
+      color: var(--text);
+      font-size: 0.9rem;
+      margin-bottom: 1rem;
+    }
+    .list-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      text-align: left;
+    }
+    .list-table th, .list-table td {
+      padding: 0.65rem 0.85rem;
+      border-bottom: 1px solid var(--border);
+      max-width: 300px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .list-table th {
+      color: var(--accent);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+    }
+    .list-table tr:hover {
+      background-color: var(--surface-card);
+      cursor: pointer;
+    }
+
+    /* ==========================================
+       MODAL: LEXICON TERM CARD (Click on word)
+       ========================================== */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(11, 19, 43, 0.8);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+      animation: fadeIn 0.15s ease-out;
+    }
+    .modal-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1.1rem;
+      max-width: 620px;
+      width: 100%;
+      padding: 1.5rem;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+      animation: slideUp 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .modal-badge {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.65rem;
+      border-radius: 1rem;
+      background-color: var(--fr-bg);
+      color: var(--accent);
+      border: 1px solid var(--fr-border);
+    }
+    .modal-close-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      font-size: 1.35rem;
+      cursor: pointer;
+      padding: 0.2rem 0.5rem;
+      border-radius: 0.4rem;
+      transition: all 0.15s;
+    }
+    .modal-close-btn:hover {
+      color: var(--text);
+      background-color: var(--surface-card);
+    }
+    .modal-term-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+    .modal-term-de {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+    .modal-section {
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+    }
+    .modal-section-title {
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+    }
+    .modal-section-body {
+      font-size: 0.95rem;
+      line-height: 1.5;
+      padding: 0.85rem;
+      border-radius: 0.5rem;
+    }
+    .modal-de-body {
+      background-color: var(--surface-card);
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 500;
+    }
+    .modal-fr-body {
+      background-color: rgba(16, 185, 129, 0.08);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      color: var(--text);
+    }
+    .modal-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 0.25rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ==========================================
+       MODAL: FULL LEXICON BROWSER
+       ========================================== */
+    .lex-browser-card {
+      background-color: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 1rem;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      overflow: hidden;
+    }
+    .lex-browser-header {
+      padding: 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--surface-card);
+    }
+    .lex-browser-body {
+      padding: 1.25rem;
+      overflow-y: auto;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .lex-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 0.75rem;
+    }
+    .lex-item {
+      background: var(--surface-card);
+      border: 1px solid var(--border);
+      border-radius: 0.6rem;
+      padding: 0.85rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .lex-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    }
+    .lex-item-term {
+      font-weight: 700;
+      color: var(--text);
+      font-size: 0.95rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .lex-item-trans {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .lex-item-cat {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    @keyframes slideDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .mobile-theme-select {
+      display: none;
+      width: 100%;
+      padding: 0.5rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      border-radius: 0.5rem;
+      border: 1px solid var(--border);
+      background-color: var(--surface-card);
+      color: var(--text);
+      cursor: pointer;
+    }
+    .progress-label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-align: right;
+      margin-top: 0.15rem;
+    }
+    @media (max-width: 640px) {
+      header { flex-direction: column; gap: 0.5rem; align-items: stretch; }
+      .rating-buttons { grid-template-columns: 1fr; }
+      .nav-bar { flex-direction: column; gap: 0.5rem; }
+      .flashcard { padding: 1.1rem; }
+      .modal-card { padding: 1.1rem; }
+      #theme-pills { display: none; }
+      .mobile-theme-select { display: block; }
+      .stats-bar { grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 0.35rem; }
+      .stat-card { padding: 0.4rem 0.5rem; }
+      .stat-val { font-size: 1rem; }
+      .stat-label { font-size: 0.65rem; }
+    }
+    /* --- Ajouts pour la version permis mer --- */
+    .filter-row-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
+    .filter-row { display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; margin-bottom: 0.35rem; flex-wrap: wrap; gap: 0.5rem; }
+    .pill-sep { width: 1px; align-self: stretch; background: var(--border); margin: 0 0.25rem; }
+    .masque { display: inline-block; min-width: 3.5em; border-bottom: 2px dashed var(--accent); color: transparent; user-select: none; }
+    .sens-tag { font-size: 0.7rem; color: var(--text-muted); }
+    .lex-item-niveau { font-size: 0.7rem; color: var(--star); margin-left: 0.4rem; }
+    .q-de em, .a-de em { color: var(--text-muted); }
+    #panneau-filtres > summary { cursor: pointer; list-style: none; display: flex; gap: 0.5rem; align-items: baseline; flex-wrap: wrap; }
+    #panneau-filtres > summary::-webkit-details-marker { display: none; }
+    #panneau-filtres > summary::before { content: '▸'; color: var(--text-muted); }
+    #panneau-filtres[open] > summary::before { content: '▾'; }
+    #resume-filtres { font-size: 0.75rem; color: var(--accent); font-weight: 600; }
+    .vide-section { color: var(--text-muted); font-size: 0.85rem; padding: 0.25rem 0; }
+    @media (max-width: 640px) {
+      .filter-pills { display: flex !important; }
+      .shortcuts-hint { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-title-box">
+      <span style="font-size: 1.4rem;">⛵</span>
+      <div>
+        <div style="display: flex; align-items: center; gap: 0.4rem;">
+          <h1>Entraînement permis mer</h1>
+          <span class="header-badge">Voile · OSNM</span>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-muted);" id="header-sous-titre"></div>
+      </div>
+    </div>
+    <div class="top-controls">
+      <button class="btn btn-accent" onclick="ouvrirGlossaire()" id="btn-glossaire">📖 Glossaire</button>
+      <button class="btn" onclick="basculerVue()">
+        <span id="vue-icone">📋</span> <span id="vue-texte">Liste</span>
+      </button>
+      <button class="btn" onclick="basculerTheme()" title="Clair / sombre">🌓</button>
+    </div>
+  </header>
+
+  <div class="container">
+    <div class="filter-section">
+      <details id="panneau-filtres">
+      <summary><span class="filter-row-label">⚙️ Filtres</span> <span id="resume-filtres"></span></summary>
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+        <span class="filter-row-label">1. Section</span>
+        <button class="btn btn-active" id="btn-ordre" onclick="changerOrdre()" style="padding: 0.25rem 0.6rem; font-size: 0.75rem;">
+          🔀 <span id="ordre-etat">🧠 Intelligent</span>
+        </button>
+      </div>
+      <div class="filter-pills" id="pills-section"></div>
+
+      <div id="filtres-glossaire">
+        <div class="filter-row"><span class="filter-row-label">Thème du glossaire</span></div>
+        <div class="filter-pills" id="pills-theme"></div>
+        <div class="filter-row"><span class="filter-row-label">Niveau et sens</span></div>
+        <div class="filter-pills" id="pills-niveau"></div>
+      </div>
+
+      <div class="filter-row">
+        <span class="filter-row-label">2. Statut</span>
+        <span id="badge-filtre" style="font-size: 0.75rem; color: var(--accent); font-weight: 600;"></span>
+      </div>
+      <div class="stats-bar">
+        <div class="stat-card active" data-status="all" onclick="filtrerStatut('all')" title="Toutes les cartes de la sélection">
+          <span class="stat-label">🔘 Toutes</span><span class="stat-val" id="stat-total">0</span>
+        </div>
+        <div class="stat-card" data-status="unrated" onclick="filtrerStatut('unrated')" title="Cartes pas encore évaluées">
+          <span class="stat-label">⚪ Nouvelles</span><span class="stat-val" style="color: var(--text-muted);" id="stat-unrated">0</span>
+        </div>
+        <div class="stat-card" data-status="review" onclick="filtrerStatut('review')" title="Cartes à revoir">
+          <span class="stat-label">❌ À revoir</span><span class="stat-val" style="color: var(--danger);" id="stat-review">0</span>
+        </div>
+        <div class="stat-card" data-status="hesitant" onclick="filtrerStatut('hesitant')" title="Cartes hésitantes">
+          <span class="stat-label">🟡 Hésitant</span><span class="stat-val" style="color: var(--warning);" id="stat-hesitant">0</span>
+        </div>
+        <div class="stat-card" data-status="mastered" onclick="filtrerStatut('mastered')" title="Cartes maîtrisées">
+          <span class="stat-label">✅ Maîtrisé</span><span class="stat-val" style="color: var(--success);" id="stat-mastered">0</span>
+        </div>
+        <div class="stat-card" data-status="todo" onclick="filtrerStatut('todo')" title="À revoir + hésitant">
+          <span class="stat-label">🎯 À travailler</span><span class="stat-val" style="color: var(--warning);" id="stat-todo">0</span>
+        </div>
+      </div>
+      </details>
+      <div class="progress-bar-container">
+        <div id="bar-mastered" class="progress-chunk bg-mastered" style="width: 0%;" title="Maîtrisé"></div>
+        <div id="bar-hesitant" class="progress-chunk bg-hesitant" style="width: 0%;" title="Hésitant"></div>
+        <div id="bar-review" class="progress-chunk bg-review" style="width: 0%;" title="À revoir"></div>
+      </div>
+      <div class="progress-label" id="progress-label"></div>
+    </div>
+
+    <!-- VUE CARTES -->
+    <div id="card-view" class="card-view">
+      <div class="flashcard">
+        <div class="card-header">
+          <div style="display: flex; gap: 0.4rem; align-items: center; flex-wrap: wrap;">
+            <span class="section-tag" id="carte-section"></span>
+            <span class="star-tag" id="carte-niveau" style="display: none;"></span>
+            <span class="status-badge status-0" id="carte-statut">⚪ Nouvelle</span>
+          </div>
+          <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted);" id="carte-compteur"></span>
+        </div>
+
+        <div id="etat-vide" style="display: none; text-align: center; padding: 2.5rem 1rem;">
+          <div style="font-size: 3rem; margin-bottom: 0.75rem;">🎯</div>
+          <div id="vide-titre" style="font-size: 1.25rem; font-weight: 700; margin-bottom: 0.5rem;"></div>
+          <div id="vide-texte" style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.5; max-width: 500px; margin: 0 auto 1.5rem auto;"></div>
+          <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+            <button class="btn btn-accent" onclick="filtrerStatut('all')">Afficher tous les statuts</button>
+            <button class="btn" onclick="reinitialiserFiltres()">Réinitialiser les filtres</button>
+          </div>
+        </div>
+
+        <div id="contenu-carte" style="display: flex; flex-direction: column; gap: 1.25rem;">
+          <div class="question-container">
+            <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em;">
+              <span id="carte-consigne">Question</span>
+            </div>
+            <div class="q-de-box"><div class="q-de" id="carte-q"></div></div>
+          </div>
+
+          <div id="zone-reveler" style="text-align: center; margin: 1.5rem 0;">
+            <button class="btn btn-accent" onclick="revelerReponse()" style="padding: 0.75rem 2rem; font-size: 1rem; width: 100%; max-width: 380px;">
+              💡 Voir la réponse
+            </button>
+          </div>
+
+          <div id="zone-reponse" class="answer-container" style="display: none;">
+            <div class="a-de-box">
+              <div class="a-label"><span>Réponse attendue</span></div>
+              <div class="a-de" id="carte-a"></div>
+              <div class="sens-tag" id="carte-source" style="margin-top: 0.5rem;"></div>
+            </div>
+            <div class="action-controls">
+              <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; text-align: center;">Auto-évaluation</div>
+              <div class="rating-buttons">
+                <button class="btn-rate rate-danger" onclick="evaluer(1)"><span>❌ 1 · À revoir</span><span class="sub">Touche 1</span></button>
+                <button class="btn-rate rate-warning" onclick="evaluer(2)"><span>🟡 2 · Hésitant</span><span class="sub">Touche 2</span></button>
+                <button class="btn-rate rate-success" onclick="evaluer(3)"><span>✅ 3 · Maîtrisé</span><span class="sub">Touche 3</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="nav-bar" id="barre-nav">
+        <button class="btn" onclick="cartePrecedente()" style="padding: 0.6rem 1.2rem;">← Précédente</button>
+        <span class="shortcuts-hint">
+          Raccourcis : <span class="kbd">Espace</span> voir / suivante · <span class="kbd">1</span> <span class="kbd">2</span> <span class="kbd">3</span> évaluer · <span class="kbd">Échap</span> fermer
+        </span>
+        <button class="btn btn-accent" onclick="carteSuivante()" style="padding: 0.6rem 1.2rem;">Suivante →</button>
+      </div>
+    </div>
+
+    <!-- VUE LISTE -->
+    <div id="list-view" class="list-view">
+      <input type="text" id="recherche-liste" class="search-bar" placeholder="🔍 Chercher dans les questions et réponses…" oninput="afficherListe()">
+      <div style="overflow-x: auto;">
+        <table class="list-table">
+          <thead>
+            <tr>
+              <th style="width: 50px;">#</th>
+              <th>Section</th>
+              <th>Question</th>
+              <th>Réponse</th>
+              <th style="width: 80px;">Statut</th>
+            </tr>
+          </thead>
+          <tbody id="corps-liste"></tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- FENÊTRE : UN TERME -->
+  <div id="lex-modal" class="modal-overlay" style="display: none;" onclick="if (event.target.id === 'lex-modal') fermerTerme()">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div class="modal-badge" id="terme-theme"></div>
+        <button class="modal-close-btn" onclick="fermerTerme()" title="Fermer (Échap)">✕</button>
+      </div>
+      <div class="modal-term-row"><div class="modal-term-de" id="terme-nom"></div></div>
+      <div class="modal-section">
+        <div class="modal-section-title" id="terme-niveau"></div>
+        <div class="modal-section-body modal-de-body" id="terme-definition"></div>
+      </div>
+      <div class="modal-footer">
+        <span style="font-size: 0.75rem; color: var(--text-muted);"><span class="kbd">Échap</span> pour fermer</span>
+        <button class="btn btn-accent" onclick="fermerTerme()" style="padding: 0.45rem 1.1rem;">Compris</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- FENÊTRE : GLOSSAIRE COMPLET -->
+  <div id="lexicon-browser-modal" class="modal-overlay" style="display: none;" onclick="if (event.target.id === 'lexicon-browser-modal') fermerGlossaire()">
+    <div class="lex-browser-card">
+      <div class="lex-browser-header">
+        <div>
+          <div style="font-size: 1.15rem; font-weight: 700;">📖 Glossaire de la voile</div>
+          <div style="font-size: 0.8rem; color: var(--text-muted);" id="glossaire-sous-titre"></div>
+        </div>
+        <button class="modal-close-btn" onclick="fermerGlossaire()" title="Fermer (Échap)">✕</button>
+      </div>
+      <div class="lex-browser-body">
+        <input type="text" id="recherche-glossaire" class="search-bar" placeholder="🔍 Chercher un terme ou une définition…" oninput="afficherGlossaire()">
+        <div class="filter-pills" id="pills-glossaire"></div>
+        <div style="font-size: 0.8rem; color: var(--text-muted);" id="glossaire-compte"></div>
+        <div class="lex-grid" id="grille-glossaire"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="glossaire.js"></script>
+  <script src="questions.js"></script>
+  <script>
+    // ==========================================
+    // DONNÉES
+    // ==========================================
+    const THEMES = {
+      bateau:     '⛵ Le bateau',
+      vent:       '💨 Vent et allures',
+      voiles:     '🧵 Voiles',
+      greement:   '🪢 Gréement et cordages',
+      gros_temps: '🌊 Mouvements et gros temps',
+      mouillage:  '⚓ Mouillage',
+      maree:      '🌗 Marée',
+    };
+    const NIVEAUX = { 3: '★★★ Essentiel', 2: '★★ Utile' };
+    const CLE_STOCKAGE = 'permis_mer_evaluations';
+
+    function echapperRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
+
+    // Masque le terme dans sa propre définition (question « définition → mot »)
+    function masquer(definition, mots) {
+      let t = definition;
+      for (const mot of mots) {
+        const re = new RegExp('(?<![\\p{L}])' + echapperRegex(mot) + '(s|x)?(?![\\p{L}])', 'giu');
+        t = t.replace(re, '<span class="masque">' + '_'.repeat(mot.length) + '</span>');
+      }
+      return t;
+    }
+
+    const CARTES = [];
+    for (const g of GLOSSAIRE) {
+      CARTES.push({
+        id: `g-${g.id}-def`, section: 'glossaire', theme: g.theme, niveau: g.niveau, sens: 'def', star: g.niveau === 3,
+        consigne: 'Mot → définition',
+        q: `Que signifie « <strong>${g.terme}</strong> » ?`,
+        a: g.definition,
+        texteListe: g.terme,
+      });
+      if (g.niveau === 3) {
+        CARTES.push({
+          id: `g-${g.id}-mot`, section: 'glossaire', theme: g.theme, niveau: g.niveau, sens: 'mot', star: true,
+          consigne: 'Définition → mot',
+          q: `Quel est le terme ?<br><br>${masquer(g.definition, g.masques)}`,
+          a: `<strong>${g.terme}</strong>`,
+          texteListe: g.definition,
+        });
+      }
+    }
+    for (const q of QUESTIONS) {
+      CARTES.push({ ...q, consigne: 'Question d\'examen', texteListe: q.q });
+    }
+
+    const SECTIONS_APP = [
+      { id: 'glossaire', nom: 'Glossaire', icone: '📖' },
+      ...SECTIONS,
+    ];
+    function nomSection(id) {
+      const s = SECTIONS_APP.find(s => s.id === id);
+      return s ? `${s.icone || ''} ${s.nom}`.trim() : id;
+    }
+
+    // ==========================================
+    // ÉTAT
+    // ==========================================
+    let filtreSection = 'all';
+    let filtreTheme = 'all';
+    let filtreNiveau = 'all';   // 'all' | 3 | 2
+    let filtreSens = 'all';     // 'all' | 'def' | 'mot'
+    let filtreStatut = 'all';
+    let ordre = 'smart';        // 'sequential' | 'smart' | 'random'
+    let listeActive = [];
+    let index = 0;
+    let revele = false;
+    let vueListe = false;
+    let carteCourante = null;
+    let categorieGlossaire = 'all';
+
+    let evaluations = {};
+    try { evaluations = JSON.parse(localStorage.getItem(CLE_STOCKAGE) || '{}'); } catch (e) { evaluations = {}; }
+    function sauver() {
+      try { localStorage.setItem(CLE_STOCKAGE, JSON.stringify(evaluations)); } catch (e) {}
+    }
+    function statut(id) { return evaluations[id] || 0; }
+
+    // ==========================================
+    // FILTRES
+    // ==========================================
+    function pill(libelle, actif, action) {
+      return `<button class="pill${actif ? ' active' : ''}" onclick="${action}">${libelle}</button>`;
+    }
+
+    function afficherPills() {
+      const parSection = id => CARTES.filter(c => c.section === id).length;
+      let h = pill(`🔘 Tout (${CARTES.length})`, filtreSection === 'all', "choisirSection('all')");
+      for (const s of SECTIONS_APP) {
+        h += pill(`${s.icone || ''} ${s.nom} (${parSection(s.id)})`, filtreSection === s.id, `choisirSection('${s.id}')`);
+      }
+      h += pill(`⭐ Prioritaires (${CARTES.filter(c => c.star).length})`, filtreSection === 'star', "choisirSection('star')");
+      if (SECTIONS.length === 0) {
+        h += `<span class="vide-section">Les questions des cours s'ajouteront ici au fil des séances.</span>`;
+      }
+      document.getElementById('pills-section').innerHTML = h;
+
+      const glossaireVisible = filtreSection === 'glossaire';
+      document.getElementById('filtres-glossaire').style.display = glossaireVisible ? 'block' : 'none';
+      if (!glossaireVisible) return;
+
+      const gl = CARTES.filter(c => c.section === 'glossaire');
+      let t = pill(`Tous (${gl.length})`, filtreTheme === 'all', "choisirTheme('all')");
+      for (const [id, nom] of Object.entries(THEMES)) {
+        t += pill(`${nom} (${gl.filter(c => c.theme === id).length})`, filtreTheme === id, `choisirTheme('${id}')`);
+      }
+      document.getElementById('pills-theme').innerHTML = t;
+
+      let n = pill('Tous niveaux', filtreNiveau === 'all', "choisirNiveau('all')");
+      n += pill(NIVEAUX[3], filtreNiveau === 3, 'choisirNiveau(3)');
+      n += pill(NIVEAUX[2], filtreNiveau === 2, 'choisirNiveau(2)');
+      n += '<span class="pill-sep"></span>';
+      n += pill('Les deux sens', filtreSens === 'all', "choisirSens('all')");
+      n += pill('Mot → définition', filtreSens === 'def', "choisirSens('def')");
+      n += pill('Définition → mot', filtreSens === 'mot', "choisirSens('mot')");
+      document.getElementById('pills-niveau').innerHTML = n;
+    }
+
+    function choisirSection(s) {
+      filtreSection = s;
+      if (s !== 'glossaire') { filtreTheme = 'all'; filtreNiveau = 'all'; filtreSens = 'all'; }
+      appliquerFiltres();
+    }
+    function choisirTheme(t) { filtreTheme = t; appliquerFiltres(); }
+    function choisirNiveau(n) { filtreNiveau = n; appliquerFiltres(); }
+    function choisirSens(s) { filtreSens = s; appliquerFiltres(); }
+    function filtrerStatut(s) { filtreStatut = s; appliquerFiltres(); }
+    function reinitialiserFiltres() {
+      filtreSection = 'all'; filtreTheme = 'all'; filtreNiveau = 'all'; filtreSens = 'all'; filtreStatut = 'all';
+      appliquerFiltres();
+    }
+
+    function selectionDeBase() {
+      return CARTES.filter(c => {
+        if (filtreSection === 'star') return c.star;
+        if (filtreSection !== 'all' && c.section !== filtreSection) return false;
+        if (filtreSection === 'glossaire') {
+          if (filtreTheme !== 'all' && c.theme !== filtreTheme) return false;
+          if (filtreNiveau !== 'all' && c.niveau !== filtreNiveau) return false;
+          if (filtreSens !== 'all' && c.sens !== filtreSens) return false;
+        }
+        return true;
+      });
+    }
+
+    function libelleSelection() {
+      if (filtreSection === 'all') return 'Tout';
+      if (filtreSection === 'star') return '⭐ Prioritaires';
+      const morceaux = [nomSection(filtreSection)];
+      if (filtreSection === 'glossaire') {
+        if (filtreTheme !== 'all') morceaux.push(THEMES[filtreTheme]);
+        if (filtreNiveau !== 'all') morceaux.push(NIVEAUX[filtreNiveau]);
+        if (filtreSens === 'def') morceaux.push('Mot → définition');
+        if (filtreSens === 'mot') morceaux.push('Définition → mot');
+      }
+      return morceaux.join(' · ');
+    }
+
+    const LIBELLES_STATUT = {
+      all: 'Tous statuts', unrated: '⚪ Nouvelles', review: '❌ À revoir',
+      hesitant: '🟡 Hésitant', mastered: '✅ Maîtrisé', todo: '🎯 À travailler',
+    };
+
+    function appliquerFiltres(garderPosition = false) {
+      afficherPills();
+      const base = selectionDeBase();
+      const compte = { 0: 0, 1: 0, 2: 0, 3: 0 };
+      base.forEach(c => compte[statut(c.id)]++);
+
+      document.getElementById('stat-total').innerText = base.length;
+      document.getElementById('stat-unrated').innerText = compte[0];
+      document.getElementById('stat-review').innerText = compte[1];
+      document.getElementById('stat-hesitant').innerText = compte[2];
+      document.getElementById('stat-mastered').innerText = compte[3];
+      document.getElementById('stat-todo').innerText = compte[1] + compte[2];
+      const pct = n => base.length ? (n / base.length * 100) + '%' : '0%';
+      document.getElementById('bar-mastered').style.width = pct(compte[3]);
+      document.getElementById('bar-hesitant').style.width = pct(compte[2]);
+      document.getElementById('bar-review').style.width = pct(compte[1]);
+      document.getElementById('progress-label').innerText = `${compte[3]} / ${base.length} maîtrisées`;
+
+      const garder = {
+        all: () => true,
+        unrated: c => statut(c.id) === 0,
+        review: c => statut(c.id) === 1,
+        hesitant: c => statut(c.id) === 2,
+        mastered: c => statut(c.id) === 3,
+        todo: c => statut(c.id) === 1 || statut(c.id) === 2,
+      }[filtreStatut];
+      const nouvelle = base.filter(garder);
+
+      if (!garderPosition) {
+        listeActive = nouvelle;
+        if (ordre === 'random') melanger(listeActive);
+        else if (ordre === 'smart') {
+          const prio = { 1: 0, 2: 1, 0: 2, 3: 3 };
+          // à statut égal, on mélange pour ne pas toujours voir les mêmes cartes en premier
+          melanger(listeActive);
+          listeActive.sort((a, b) => prio[statut(a.id)] - prio[statut(b.id)]);
+        }
+        index = 0;
+      } else {
+        const ids = new Set(nouvelle.map(c => c.id));
+        listeActive = listeActive.filter(c => ids.has(c.id));
+        if (index >= listeActive.length) index = Math.max(0, listeActive.length - 1);
+      }
+
+      const resume = `${libelleSelection()} · ${LIBELLES_STATUT[filtreStatut]} (${listeActive.length} cartes)`;
+      document.getElementById('badge-filtre').innerText = resume;
+      document.getElementById('resume-filtres').innerText = resume;
+      document.querySelectorAll('.stat-card').forEach(el =>
+        el.classList.toggle('active', el.getAttribute('data-status') === filtreStatut));
+
+      afficherCarte();
+      if (vueListe) afficherListe();
+    }
+
+    function changerOrdre() {
+      const modes = ['sequential', 'smart', 'random'];
+      const libelles = { sequential: 'Dans l\'ordre', smart: '🧠 Intelligent', random: 'Aléatoire' };
+      ordre = modes[(modes.indexOf(ordre) + 1) % modes.length];
+      document.getElementById('ordre-etat').innerText = libelles[ordre];
+      document.getElementById('btn-ordre').classList.toggle('btn-active', ordre !== 'sequential');
+      appliquerFiltres();
+    }
+
+    function melanger(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+    }
+
+    // ==========================================
+    // CARTE
+    // ==========================================
+    function afficherCarte() {
+      const vide = document.getElementById('etat-vide');
+      const contenu = document.getElementById('contenu-carte');
+      const nav = document.getElementById('barre-nav');
+
+      if (listeActive.length === 0) {
+        carteCourante = null;
+        document.getElementById('carte-section').innerText = 'Aucune sélection';
+        document.getElementById('carte-niveau').style.display = 'none';
+        document.getElementById('carte-statut').className = 'status-badge status-0';
+        document.getElementById('carte-statut').innerText = '⚪ 0 carte';
+        document.getElementById('carte-compteur').innerText = '0 / 0';
+        vide.style.display = 'block';
+        contenu.style.display = 'none';
+        nav.style.display = 'none';
+        const titres = {
+          unrated: '🎉 Toutes les cartes sont évaluées !',
+          review: '👏 Rien à revoir', todo: '👏 Rien à travailler',
+          hesitant: '👏 Aucune carte hésitante',
+          mastered: '💡 Pas encore de carte maîtrisée',
+        };
+        document.getElementById('vide-titre').innerText = titres[filtreStatut] || 'Aucune carte';
+        document.getElementById('vide-texte').innerHTML =
+          `Sélection : <strong>${libelleSelection()}</strong> + <strong>${LIBELLES_STATUT[filtreStatut]}</strong>.`;
+        return;
+      }
+
+      vide.style.display = 'none';
+      contenu.style.display = 'flex';
+      nav.style.display = 'flex';
+      carteCourante = listeActive[index];
+      const c = carteCourante;
+
+      let sec = nomSection(c.section);
+      if (c.section === 'glossaire') sec += ' › ' + THEMES[c.theme];
+      document.getElementById('carte-section').innerText = sec;
+
+      const niv = document.getElementById('carte-niveau');
+      if (c.section === 'glossaire') {
+        niv.innerText = NIVEAUX[c.niveau];
+        niv.className = c.niveau === 3 ? 'star-tag' : 'star-tag vertiefung';
+      } else {
+        niv.innerText = c.star ? '⭐ Prioritaire' : '📚 Approfondissement';
+        niv.className = c.star ? 'star-tag' : 'star-tag vertiefung';
+      }
+      niv.style.display = 'inline-flex';
+      document.getElementById('carte-compteur').innerText = `${index + 1} / ${listeActive.length}`;
+
+      const st = statut(c.id);
+      const badge = document.getElementById('carte-statut');
+      badge.className = 'status-badge status-' + st;
+      badge.innerText = ['⚪ Nouvelle', '❌ À revoir', '🟡 Hésitant', '✅ Maîtrisé'][st];
+
+      document.getElementById('carte-consigne').innerText = c.consigne;
+      document.getElementById('carte-q').innerHTML = c.q;
+      document.getElementById('carte-a').innerHTML = c.a;
+      document.getElementById('carte-source').innerText = c.source ? 'Source : ' + c.source : '';
+
+      revele = false;
+      document.getElementById('zone-reveler').style.display = 'block';
+      document.getElementById('zone-reponse').style.display = 'none';
+    }
+
+    function revelerReponse() {
+      if (revele || !carteCourante) return;
+      revele = true;
+      document.getElementById('zone-reveler').style.display = 'none';
+      document.getElementById('zone-reponse').style.display = 'flex';
+    }
+
+    function evaluer(note) {
+      if (!carteCourante) return;
+      evaluations[carteCourante.id] = note;
+      sauver();
+      const avant = listeActive.length;
+      appliquerFiltres(true);
+      // Si la carte est restée dans la liste (filtre « Toutes »), passer à la suivante
+      if (listeActive.length === avant) carteSuivante();
+    }
+
+    function carteSuivante() {
+      if (index < listeActive.length - 1) {
+        index++;
+        afficherCarte();
+      } else if (listeActive.length && confirm('Série terminée ! Recommencer depuis le début ?')) {
+        appliquerFiltres();
+      }
+    }
+
+    function cartePrecedente() {
+      if (index > 0) { index--; afficherCarte(); }
+    }
+
+    // ==========================================
+    // VUE LISTE
+    // ==========================================
+    function texteBrut(html) {
+      const d = document.createElement('div');
+      d.innerHTML = html;
+      return d.textContent;
+    }
+
+    function basculerVue() {
+      vueListe = !vueListe;
+      document.getElementById('card-view').style.display = vueListe ? 'none' : 'flex';
+      document.getElementById('list-view').style.display = vueListe ? 'block' : 'none';
+      document.getElementById('vue-icone').innerText = vueListe ? '🗂️' : '📋';
+      document.getElementById('vue-texte').innerText = vueListe ? 'Cartes' : 'Liste';
+      if (vueListe) afficherListe();
+    }
+
+    function afficherListe() {
+      const corps = document.getElementById('corps-liste');
+      corps.innerHTML = '';
+      const filtre = (document.getElementById('recherche-liste').value || '').toLowerCase();
+      listeActive.forEach((c, i) => {
+        const q = texteBrut(c.q), a = texteBrut(c.a);
+        if (filtre && !(q + ' ' + a).toLowerCase().includes(filtre)) return;
+        const st = ['⚪', '❌', '🟡', '✅'][statut(c.id)];
+        const sec = c.section === 'glossaire' ? `${THEMES[c.theme]} · ${c.consigne}` : nomSection(c.section);
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${i + 1}</td><td><span class="section-tag" style="font-size: 0.65rem;">${sec}</span></td>`
+          + `<td style="font-weight: 600;">${c.q}</td><td>${c.a}</td><td>${st}</td>`;
+        tr.onclick = () => { index = i; basculerVue(); afficherCarte(); };
+        corps.appendChild(tr);
+      });
+    }
+
+    // ==========================================
+    // GLOSSAIRE
+    // ==========================================
+    function ouvrirTerme(id) {
+      const g = GLOSSAIRE.find(x => x.id === id);
+      if (!g) return;
+      document.getElementById('terme-theme').innerText = THEMES[g.theme];
+      document.getElementById('terme-nom').innerText = g.terme;
+      document.getElementById('terme-niveau').innerText = NIVEAUX[g.niveau];
+      document.getElementById('terme-definition').innerHTML = g.definition;
+      document.getElementById('lex-modal').style.display = 'flex';
+    }
+    function fermerTerme() { document.getElementById('lex-modal').style.display = 'none'; }
+
+    function ouvrirGlossaire() {
+      document.getElementById('lexicon-browser-modal').style.display = 'flex';
+      afficherGlossaire();
+    }
+    function fermerGlossaire() { document.getElementById('lexicon-browser-modal').style.display = 'none'; }
+    function choisirCategorieGlossaire(c) { categorieGlossaire = c; afficherGlossaire(); }
+
+    function afficherGlossaire() {
+      let p = pill(`Tous (${GLOSSAIRE.length})`, categorieGlossaire === 'all', "choisirCategorieGlossaire('all')");
+      for (const [id, nom] of Object.entries(THEMES)) {
+        p += pill(nom, categorieGlossaire === id, `choisirCategorieGlossaire('${id}')`);
+      }
+      document.getElementById('pills-glossaire').innerHTML = p;
+
+      const requete = (document.getElementById('recherche-glossaire').value || '').toLowerCase().trim();
+      const entrees = GLOSSAIRE.filter(g => {
+        if (categorieGlossaire !== 'all' && g.theme !== categorieGlossaire) return false;
+        return !requete || (g.terme + ' ' + texteBrut(g.definition)).toLowerCase().includes(requete);
+      }).sort((a, b) => a.terme.localeCompare(b.terme, 'fr'));
+
+      document.getElementById('glossaire-compte').innerText = `${entrees.length} termes affichés`;
+      const grille = document.getElementById('grille-glossaire');
+      grille.innerHTML = '';
+      for (const g of entrees) {
+        const div = document.createElement('div');
+        div.className = 'lex-item';
+        div.innerHTML = `<div class="lex-item-term"><span>${g.terme}</span>`
+          + `<span class="lex-item-niveau">${g.niveau === 3 ? '★★★' : '★★'}</span></div>`
+          + `<div class="lex-item-cat">${THEMES[g.theme]}</div>`;
+        div.onclick = () => ouvrirTerme(g.id);
+        grille.appendChild(div);
+      }
+    }
+
+    // ==========================================
+    // THÈME CLAIR / SOMBRE
+    // ==========================================
+    function appliquerTheme(clair) { document.documentElement.classList.toggle('light', clair); }
+    function basculerTheme() {
+      const clair = !document.documentElement.classList.contains('light');
+      appliquerTheme(clair);
+      try { localStorage.setItem('permis_mer_theme', clair ? 'light' : 'dark'); } catch (e) {}
+    }
+    (function () {
+      let choix = null;
+      try { choix = localStorage.getItem('permis_mer_theme'); } catch (e) {}
+      appliquerTheme(choix ? choix === 'light' : window.matchMedia('(prefers-color-scheme: light)').matches);
+    })();
+
+    // ==========================================
+    // CLAVIER ET DÉMARRAGE
+    // ==========================================
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') { fermerTerme(); fermerGlossaire(); return; }
+      if (e.target.tagName === 'INPUT') return;
+      if (document.getElementById('lexicon-browser-modal').style.display === 'flex') return;
+      if (e.key === ' ' || e.code === 'Space') {
+        e.preventDefault();
+        if (!revele) revelerReponse(); else carteSuivante();
+      } else if (['1', '2', '3'].includes(e.key)) {
+        if (revele) evaluer(Number(e.key));
+      } else if (e.key === 'ArrowRight') carteSuivante();
+      else if (e.key === 'ArrowLeft') cartePrecedente();
+    });
+
+    window.addEventListener('DOMContentLoaded', () => {
+      const nbQ = QUESTIONS.length;
+      document.getElementById('header-sous-titre').innerText =
+        `${GLOSSAIRE.length} termes du glossaire · ${CARTES.length - nbQ} cartes de glossaire · ${nbQ} questions d'examen`;
+      document.getElementById('btn-glossaire').innerText = `📖 Glossaire (${GLOSSAIRE.length})`;
+      document.getElementById('glossaire-sous-titre').innerText =
+        `${GLOSSAIRE.length} termes essentiels et utiles (la section Culture n'est pas reprise)`;
+      // Filtres ouverts sur grand écran, repliés sur smartphone
+      document.getElementById('panneau-filtres').open = window.matchMedia('(min-width: 641px)').matches;
+      appliquerFiltres();
+    });
+  </script>
+</body>
+</html>

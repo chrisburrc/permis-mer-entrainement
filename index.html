@@ -759,6 +759,10 @@
     .filter-row-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
     .filter-row { display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; margin-bottom: 0.35rem; flex-wrap: wrap; gap: 0.5rem; }
     .pill-sep { width: 1px; align-self: stretch; background: var(--border); margin: 0 0.25rem; }
+    .illustration { margin: 0.9rem 0 0; text-align: center; }
+    .illustration img { max-width: 100%; max-height: 320px; border-radius: 0.5rem; background: #fff; }
+    .illustration figcaption { font-size: 0.7rem; color: var(--text-muted); margin-top: 0.3rem; }
+    .illustration figcaption a { color: inherit; }
     .terme-lien { color: inherit; text-decoration: underline dotted var(--accent); text-underline-offset: 3px; cursor: pointer; }
     .terme-lien:hover { color: var(--accent); }
     .masque { display: inline-block; min-width: 3.5em; border-bottom: 2px dashed var(--accent); color: transparent; user-select: none; }
@@ -890,6 +894,7 @@
             <div class="a-de-box">
               <div class="a-label"><span>Réponse attendue</span></div>
               <div class="a-de" id="carte-a"></div>
+              <figure class="illustration" id="carte-image" style="display: none;"></figure>
               <div class="sens-tag" id="carte-source" style="margin-top: 0.5rem;"></div>
             </div>
             <div class="action-controls">
@@ -973,6 +978,7 @@
   </div>
 
   <script src="glossaire.js"></script>
+  <script src="images.js"></script>
   <script src="questions.js"></script>
   <script>
     // ==========================================
@@ -1337,11 +1343,28 @@
       document.getElementById('carte-consigne').innerText = c.consigne;
       document.getElementById('carte-q').innerHTML = lierGlossaire(c.q, c.terme);
       document.getElementById('carte-a').innerHTML = lierGlossaire(c.a, c.terme);
+      afficherIllustration(c);
       document.getElementById('carte-source').innerText = c.source ? 'Source : ' + c.source : '';
 
       revele = false;
       document.getElementById('zone-reveler').style.display = 'block';
       document.getElementById('zone-reponse').style.display = 'none';
+    }
+
+    // Image d'illustration sous la réponse, seulement pour « mot → définition »
+    // (dans l'autre sens, l'image pourrait trahir le mot)
+    function afficherIllustration(c) {
+      const fig = document.getElementById('carte-image');
+      const img = (typeof IMAGES !== 'undefined' && c.sens === 'def') ? IMAGES[c.terme] : null;
+      if (!img) { fig.style.display = 'none'; fig.innerHTML = ''; return; }
+      const echapper = t => t.replace(/[&<>"]/g, ch => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[ch]));
+      const licence = img.licenceUrl
+        ? `<a href="${echapper(img.licenceUrl)}" target="_blank" rel="noopener">${echapper(img.licence)}</a>`
+        : echapper(img.licence);
+      fig.innerHTML = `<img src="${img.src}" alt="Illustration : ${echapper(texteBrut(c.texteListe))}" loading="lazy">`
+        + `<figcaption><a href="${echapper(img.page)}" target="_blank" rel="noopener">${echapper(img.auteur)}</a>`
+        + ` · ${licence} · Wikimedia Commons</figcaption>`;
+      fig.style.display = 'block';
     }
 
     function revelerReponse() {

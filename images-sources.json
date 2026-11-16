@@ -1,0 +1,467 @@
+[
+ {
+  "id": "babord",
+  "fichier": "File:Sail-Port-Starboard.jpg",
+  "raison": "Voilier vu de dessus : secteur rouge « Port » (bâbord) à gauche quand on regarde vers l'avant."
+ },
+ {
+  "id": "tribord",
+  "fichier": "File:Sail-Port-Starboard.jpg",
+  "raison": "Voilier vu de dessus : secteur vert « Starboard » (tribord) à droite quand on regarde vers l'avant."
+ },
+ {
+  "id": "proue",
+  "fichier": "File:Parts of sailboat.jpg",
+  "raison": "Schéma annoté d'un dériveur : l'avant de la coque est marqué « Bow » (proue)."
+ },
+ {
+  "id": "poupe",
+  "fichier": "File:Parts of sailboat.jpg",
+  "raison": "Schéma annoté d'un dériveur : l'arrière de la coque est marqué « Stern » (poupe)."
+ },
+ {
+  "id": "etrave",
+  "fichier": "File:Bow.jpg",
+  "raison": "Gros plan de l'avant d'un navire : l'étrave, arête avant de la coque, fend l'eau."
+ },
+ {
+  "id": "pont",
+  "fichier": "File:Blue safety line tied off to the red jackline with clip.jpg",
+  "raison": "Pont d'un voilier vu depuis le bord : surface plane qui ferme la coque, avec chandeliers et filières."
+ },
+ {
+  "id": "quille",
+  "fichier": "File:MariahQuarterView.jpg",
+  "raison": "Voilier soulevé hors de l'eau : la quille fixe est visible sous la coque, devant le safran."
+ },
+ {
+  "id": "derive",
+  "fichier": "File:Parts of sailboat.jpg",
+  "raison": "Schéma annoté d'un dériveur : la dérive (« Centre Board ») plonge sous la coque au milieu du bateau."
+ },
+ {
+  "id": "gouvernail",
+  "fichier": "File:Parts of sailboat.jpg",
+  "raison": "Schéma annoté d'un dériveur : le gouvernail avec son safran (« Rudder ») et sa barre (« Tiller »)."
+ },
+ {
+  "id": "safran",
+  "fichier": "File:Le voilier Mordicus (13).JPG",
+  "raison": "Arrière d'un voilier à terre : le safran, pièce immergée pivotante, est accroché au tableau arrière."
+ },
+ {
+  "id": "barre",
+  "fichier": "File:Rumpel.JPG",
+  "raison": "Grande barre franche en bois sur le pont d'un voilier traditionnel."
+ },
+ {
+  "id": "carene",
+  "fichier": "File:MariahQuarterView.jpg",
+  "raison": "Voilier hors de l'eau : la carène (partie sombre sous la ligne de flottaison) est entièrement visible."
+ },
+ {
+  "id": "lest",
+  "fichier": "File:Flat keel bulb.jpg",
+  "raison": "Quille d'un voilier à terre terminée par un bulbe de lest qui abaisse le centre de gravité."
+ },
+ {
+  "id": "chandeliers",
+  "fichier": "File:Blue safety line tied off to the red jackline with clip.jpg",
+  "raison": "Rangée de chandeliers (montants métalliques verticaux) sur le bord du pont, qui tiennent les filières."
+ },
+ {
+  "id": "filiere",
+  "fichier": "File:Blue safety line tied off to the red jackline with clip.jpg",
+  "raison": "Câbles des filières tendus de chandelier en chandelier le long du bord du pont."
+ },
+ {
+  "id": "ligne-de-vie",
+  "fichier": "File:Blue safety line tied off to the red jackline with clip.jpg",
+  "raison": "Sangle rouge tendue sur le pont (ligne de vie) avec une longe bleue accrochée par un mousqueton."
+ },
+ {
+  "id": "appendices",
+  "fichier": "File:MariahQuarterView.jpg",
+  "raison": "Voilier soulevé hors de l'eau : quille et safran, les appendices fixés sous la coque, sont bien visibles."
+ },
+ {
+  "id": "voile-de-quille",
+  "fichier": "File:Flat keel bulb.jpg",
+  "raison": "Quille à bulbe : le voile de quille est la partie mince et verticale entre la coque et le bulbe."
+ },
+ {
+  "id": "bulbe",
+  "fichier": "File:Flat keel bulb.jpg",
+  "raison": "Bulbe de lest en forme de torpille au bas d'une quille de voilier."
+ },
+ {
+  "id": "partir-en-vrac",
+  "fichier": "File:Matchrace kolk.jpg",
+  "raison": "Voilier de régate couché sur l'eau, parti au lof, à côté d'un autre bateau resté droit."
+ },
+ {
+  "id": "sancir",
+  "fichier": "File:Hobie crash! (1016708510).jpg",
+  "raison": "Catamaran qui sancit : une étrave plonge et le bateau bascule par-dessus l'avant."
+ },
+ {
+  "id": "tonture",
+  "fichier": "File:Ship's hull shape fr.png",
+  "raison": "Schéma annoté en français : la tonture avant et arrière, courbure du pont vue de profil."
+ },
+ {
+  "id": "godille",
+  "fichier": "File:Tonnerres de Brest 2012 a la godille samarkand.JPG",
+  "raison": "Petite embarcation propulsée par un aviron unique manœuvré à l'arrière (godille)."
+ },
+ {
+  "id": "cabestan",
+  "fichier": "File:Capstan from af Chapman ship 1888 01.jpg",
+  "raison": "Cabestan de navire à axe vertical, avec ses logements pour les barres de manœuvre."
+ },
+ {
+  "id": "ketch",
+  "fichier": "File:Sail plan ketch1.svg",
+  "raison": "Plan de voilure d'un ketch : grand mât à l'avant et mât d'artimon plus petit à l'arrière, encore à l'intérieur de la coque."
+ },
+ {
+  "id": "yawl",
+  "fichier": "File:Yawl (PSF).png",
+  "raison": "Dessin d'un yawl : petit mât d'artimon placé tout à l'arrière du bateau."
+ },
+ {
+  "id": "artimon",
+  "fichier": "File:Sail plan ketch1.svg",
+  "raison": "Plan de voilure d'un ketch : l'artimon est le mât arrière, plus petit, avec sa voile."
+ },
+ {
+  "id": "allure",
+  "fichier": "File:Allures à la voile.svg",
+  "raison": "Rosace des allures en français (près serré, bon plein, travers, largue, grand largue, vent arrière) avec les angles au vent."
+ },
+ {
+  "id": "lit-du-vent",
+  "fichier": "File:Allures à la voile.svg",
+  "raison": "Rosace des allures montrant l'axe du vent et la zone « vent debout » où le voilier ne peut pas avancer."
+ },
+ {
+  "id": "pres",
+  "fichier": "File:Allures à la voile.svg",
+  "raison": "Rosace des allures en français (près serré, bon plein, travers, largue, grand largue, vent arrière) avec les angles au vent ; le près (près serré ~45-55°) est la première allure à côté du vent debout."
+ },
+ {
+  "id": "pres-serre",
+  "fichier": "File:Allures à la voile.svg",
+  "raison": "Rosace des allures en français (près serré, bon plein, travers, largue, grand largue, vent arrière) avec les angles au vent ; le secteur « près serré » est le plus proche du lit du vent (~45°)."
+ },
+ {
+  "id": "bon-plein",
+  "fichier": "File:Allures à la voile.svg",
+  "raison": "Rosace des allures en français (près serré, bon plein, travers, largue, grand largue, vent arrière) avec les angles au vent ; le secteur « bon plein » est vers 55-65° du vent."
+ },
+ {
+  "id": "travers",
+  "fichier": "File:Allures à la voile.svg",
+  "raison": "Rosace des allures en français (près serré, bon plein, travers, largue, grand largue, vent arrière) avec les angles au vent ; le secteur « travers » est autour de 90° du vent."
+ },
+ {
+  "id": "largue",
+  "fichier": "File:Allures à la voile.svg",
+  "raison": "Rosace des allures en français (près serré, bon plein, travers, largue, grand largue, vent arrière) avec les angles au vent ; le secteur « largue » est entre le travers et le grand largue (~100-120°)."
+ },
+ {
+  "id": "grand-largue",
+  "fichier": "File:Allures à la voile.svg",
+  "raison": "Rosace des allures en français (près serré, bon plein, travers, largue, grand largue, vent arrière) avec les angles au vent ; le secteur « grand largue » est entre ~120° et 170° du vent."
+ },
+ {
+  "id": "vent-arriere",
+  "fichier": "File:Allures à la voile.svg",
+  "raison": "Rosace des allures en français (près serré, bon plein, travers, largue, grand largue, vent arrière) avec les angles au vent ; le secteur « vent arrière » est dans l'axe arrière (180°)."
+ },
+ {
+  "id": "allures-portantes",
+  "fichier": "File:Allures à la voile.svg",
+  "raison": "Rosace des allures où la bande « allures portantes » regroupe largue, grand largue et vent arrière."
+ },
+ {
+  "id": "amure",
+  "fichier": "File:FMIB 37419 Amures.jpeg",
+  "raison": "Gravure légendée en français : deux voiliers sous la flèche du vent, A bâbord amures et B tribord amures."
+ },
+ {
+  "id": "au-vent",
+  "fichier": "File:Upwind downwind example.png",
+  "raison": "Schéma (anglais simple) : par rapport à un point, la zone d'où vient le vent (upwind/windward) et celle où il va (downwind/leeward)."
+ },
+ {
+  "id": "sous-le-vent",
+  "fichier": "File:Upwind downwind example.png",
+  "raison": "Schéma (anglais simple) : par rapport à un point, la zone sous le vent (downwind/leeward), opposée à celle d'où vient le vent."
+ },
+ {
+  "id": "louvoyer",
+  "fichier": "File:Beating to windward.svg",
+  "raison": "Schéma d'une route en zigzag contre le vent, avec les virements de bord successifs (étiquettes en anglais)."
+ },
+ {
+  "id": "virer-de-bord",
+  "fichier": "File:FMIB 37428 Cotre virant Vent Devant.jpeg",
+  "raison": "Gravure légendée en français : voilier virant vent devant, du près tribord amures au près bâbord amures en passant debout au vent."
+ },
+ {
+  "id": "empanner",
+  "fichier": "File:Gipp.png",
+  "raison": "Schéma sans texte : voilier au portant dont la bôme et les voiles passent d'un bord à l'autre, l'arrière traversant le lit du vent."
+ },
+ {
+  "id": "gite",
+  "fichier": "File:Heeling sailboat.jpg",
+  "raison": "Photo d'un voilier au près nettement incliné sur le côté par le vent."
+ },
+ {
+  "id": "roulis",
+  "fichier": "File:FMIB 36750 Causes du Mal de Mer- A, le Tangage; B le Roulis.jpeg",
+  "raison": "Gravure légendée en français : en B, le navire vu de l'arrière s'incline d'un bord sur l'autre (roulis)."
+ },
+ {
+  "id": "tangage",
+  "fichier": "File:FMIB 36750 Causes du Mal de Mer- A, le Tangage; B le Roulis.jpeg",
+  "raison": "Gravure légendée en français : en A, le navire vu de côté plonge de l'avant puis de l'arrière (tangage)."
+ },
+ {
+  "id": "vent-reel-vent-apparent",
+  "fichier": "File:Vent-apparent.png",
+  "raison": "Schéma en français : le vent réel combiné au vent relatif créé par le déplacement donne le vent apparent."
+ },
+ {
+  "id": "cape",
+  "fichier": "File:Beiliegen (Segeln)-fr.svg",
+  "raison": "Schéma « Direction du vent » d'un voilier à la cape, foc à contre et grand-voile choquée, presque arrêté."
+ },
+ {
+  "id": "grand-voile",
+  "fichier": "File:Bavaria 36 Kroatien 2006.jpg",
+  "raison": "Voilier de croisière vu de côté, grand-voile blanche bien établie sur le mât et la bôme."
+ },
+ {
+  "id": "foc",
+  "fichier": "File:Jib vs genoa.svg",
+  "raison": "Schéma sans texte : à gauche un foc (vert) qui ne déborde pas en arrière du mât, à droite un génois qui recouvre la grand-voile."
+ },
+ {
+  "id": "genois",
+  "fichier": "File:Jib vs genoa.svg",
+  "raison": "Schéma sans texte comparant un foc (gauche) et un génois (droite, bleu) qui recouvre une partie de la grand-voile."
+ },
+ {
+  "id": "spi-spinnaker",
+  "fichier": "File:Sailboat on broad reach with spinnaker.jpg",
+  "raison": "Voilier au portant sous spi symétrique rayé bleu et blanc, grande voile d'avant creuse bien visible."
+ },
+ {
+  "id": "tourmentin",
+  "fichier": "File:Sturmbesegelung 2010.JPG",
+  "raison": "Voilier sous voilure de gros temps : petit foc orange très réduit (tourmentin) à l'avant et voile de cape orange à la place de la grand-voile."
+ },
+ {
+  "id": "point-d-amure",
+  "fichier": "File:Parts of a Sail.png",
+  "raison": "Schéma d'une grand-voile bermudienne nommant en anglais ses coins (head = point de drisse, tack = point d'amure, clew = point d'écoute) et ses côtés."
+ },
+ {
+  "id": "point-d-ecoute",
+  "fichier": "File:Parts of a Sail.png",
+  "raison": "Schéma d'une grand-voile bermudienne nommant en anglais ses coins (head = point de drisse, tack = point d'amure, clew = point d'écoute) et ses côtés."
+ },
+ {
+  "id": "point-de-drisse",
+  "fichier": "File:Parts of a Sail.png",
+  "raison": "Schéma d'une grand-voile bermudienne nommant en anglais ses coins (head = point de drisse, tack = point d'amure, clew = point d'écoute) et ses côtés."
+ },
+ {
+  "id": "guindant-chute-bordure",
+  "fichier": "File:Parts of a Sail.png",
+  "raison": "Schéma d'une grand-voile bermudienne nommant en anglais ses trois côtés : luff = guindant, leech = chute, foot = bordure."
+ },
+ {
+  "id": "ris",
+  "fichier": "File:Reefed Sail (PSF).png",
+  "raison": "Dessin légendé « reefed sail » : bande basse de la voile repliée et saisie sur la bôme, avec la rangée de garcettes de ris au-dessus."
+ },
+ {
+  "id": "ariser",
+  "fichier": "File:Lady Maryland reef points MD1.jpg",
+  "raison": "Photo d'une grand-voile arisée : le bas de la voile est roulé et attaché sur la bôme par les garcettes de ris."
+ },
+ {
+  "id": "bome",
+  "fichier": "File:Mainsail-corners.png",
+  "raison": "Photo légendée en anglais d'un voilier (gréement aurique) où une flèche « Boom » désigne la bôme qui tient le bas de la grand-voile."
+ },
+ {
+  "id": "trinquette",
+  "fichier": "File:Trinquette - staysail.jpg",
+  "raison": "Goélette sous voiles ; une flèche rouge désigne la trinquette, voile d'avant établie entre le mât de misaine et les focs extérieurs."
+ },
+ {
+  "id": "gennaker",
+  "fichier": "File:Gennaker fléché.jpg",
+  "raison": "Voilier de sport au portant ; une flèche désigne le gennaker bleu amuré sur un bout-dehors dans l'axe du bateau."
+ },
+ {
+  "id": "lattes",
+  "fichier": "File:Verschiedene Segellatten.jpg",
+  "raison": "Plusieurs lattes de voile (bois, fibre) posées sur une voile pliée."
+ },
+ {
+  "id": "illet",
+  "fichier": "File:Hals (Gennaker).jpg",
+  "raison": "Gros plan sur le coin d'une voile : œillet métallique serti dans une renforcement en sangle."
+ },
+ {
+  "id": "cunningham",
+  "fichier": "File:Cunningham.jpg",
+  "raison": "Pied de mât d'un dériveur ; le cerclage rouge entoure le cunningham qui tend le guindant près du point d'amure."
+ },
+ {
+  "id": "etai",
+  "fichier": "File:Yacht stay.svg",
+  "raison": "Schéma d'un voilier où l'étai est tracé en rouge, du haut du mât jusqu'à l'étrave."
+ },
+ {
+  "id": "hauban",
+  "fichier": "File:Yacht shroud 1.svg",
+  "raison": "Schéma d'un voilier où les haubans sont tracés en rouge, du haut du mât jusqu'aux bords du pont en passant par les barres de flèche."
+ },
+ {
+  "id": "pataras",
+  "fichier": "File:Yacht backstay.svg",
+  "raison": "Schéma d'un voilier où le pataras est tracé en rouge, du haut du mât jusqu'à la poupe."
+ },
+ {
+  "id": "bastaque",
+  "fichier": "File:Yacht running backstay.svg",
+  "raison": "Schéma d'un voilier où les deux bastaques sont tracées en rouge, du haut du mât vers l'arrière, une de chaque côté."
+ },
+ {
+  "id": "drisse",
+  "fichier": "File:Halyard.svg",
+  "raison": "Schéma d'un voilier où les drisses de grand-voile et de foc sont tracées en rouge le long du mât."
+ },
+ {
+  "id": "ecoute",
+  "fichier": "File:Gréement.svg",
+  "raison": "Schéma annoté en français d'un voilier, avec l'écoute de grand-voile, la bôme, le hale-bas et le vit-de-mulet."
+ },
+ {
+  "id": "hale-bas",
+  "fichier": "File:Gréement.svg",
+  "raison": "Schéma annoté en français d'un voilier, avec le hale-bas entre le pied du mât et la bôme."
+ },
+ {
+  "id": "vit-de-mulet",
+  "fichier": "File:Gréement.svg",
+  "raison": "Schéma annoté en français d'un voilier, avec le vit-de-mulet qui articule la bôme sur le mât."
+ },
+ {
+  "id": "balancine",
+  "fichier": "File:Yacht topping lift.svg",
+  "raison": "Schéma d'un voilier où la balancine est tracée en rouge, du haut du mât jusqu'au bout de la bôme."
+ },
+ {
+  "id": "winch",
+  "fichier": "File:Winch.PNG",
+  "raison": "Photo d'un winch de voilier avec sa manivelle et une écoute rouge enroulée autour."
+ },
+ {
+  "id": "taquet",
+  "fichier": "File:Tied cleat.jpg",
+  "raison": "Photo d'un taquet classique sur lequel un cordage est tourné et bloqué."
+ },
+ {
+  "id": "palan",
+  "fichier": "File:Palans.jpg",
+  "raison": "Photo d'un palan à deux poulies doubles dans lequel passe un cordage."
+ },
+ {
+  "id": "moufle",
+  "fichier": "File:Palans.jpg",
+  "raison": "Photo de deux poulies doubles (moufles) formant un palan."
+ },
+ {
+  "id": "nud",
+  "fichier": "File:Bowline knot.jpg",
+  "raison": "Dessin en deux étapes d'un nœud de chaise."
+ },
+ {
+  "id": "ancre",
+  "fichier": "File:Genuine CQR.jpg",
+  "raison": "Photo d'une ancre charrue (CQR) posée sur le sable."
+ },
+ {
+  "id": "guindeau",
+  "fichier": "File:Guindeau vertical.jpg",
+  "raison": "Photo d'un guindeau sur le pont avant d'un voilier, avec la chaîne d'ancre qui y passe."
+ },
+ {
+  "id": "bout-dehors",
+  "fichier": "File:Piep2005-1.JPG",
+  "raison": "Photo d'un voilier traditionnel avec un long bout-dehors qui dépasse de l'étrave."
+ },
+ {
+  "id": "corne",
+  "fichier": "File:Gaff rig spars.jpg",
+  "raison": "Schéma (en anglais) d'une voile aurique où la corne (gaff) est désignée en haut de la voile."
+ },
+ {
+  "id": "cadene",
+  "fichier": "File:Chainplate on a Bavaria 35 Match ..jpg",
+  "raison": "Photo d'une cadène en inox fixée sur le pont d'un voilier."
+ },
+ {
+  "id": "ridoir",
+  "fichier": "File:Turnbuckle.jpg",
+  "raison": "Photo d'un ridoir à vis (corps fileté avec deux embouts)."
+ },
+ {
+  "id": "rea",
+  "fichier": "File:Kanifas ze statku Lwow.jpg",
+  "raison": "Photo d'une poulie en bois dont on voit le réa (roue à gorge) dans la caisse."
+ },
+ {
+  "id": "chaumard",
+  "fichier": "File:Chaumard.JPG",
+  "raison": "Photo d'un chaumard en bronze fixé sur le bord du pont."
+ },
+ {
+  "id": "davier",
+  "fichier": "File:Davier et ancre.jpg",
+  "raison": "Photo de l'étrave d'un voilier avec l'ancre posée dans son davier."
+ },
+ {
+  "id": "ecubier",
+  "fichier": "File:Ankerklüse.jpg",
+  "raison": "Photo d'un écubier dans le pont, par où passe la chaîne d'ancre."
+ },
+ {
+  "id": "epissure",
+  "fichier": "File:Rope Eye splice finished.jpg",
+  "raison": "Photo d'une épissure en œil sur un cordage toronné."
+ },
+ {
+  "id": "grelin",
+  "fichier": "File:Hawser rope of the Rio Tagus (ship, 1979), Sète cf01.jpg",
+  "raison": "Photo d'un gros cordage qui amarre un navire au quai."
+ },
+ {
+  "id": "amarre",
+  "fichier": "File:Hawser rope of the Rio Tagus (ship, 1979), Sète cf01.jpg",
+  "raison": "Photo d'une amarre tendue entre un navire et le quai."
+ },
+ {
+  "id": "orin",
+  "fichier": "File:Anchor trip line and buoy.svg",
+  "raison": "Schéma (en anglais) d'un bateau au mouillage avec l'orin reliant l'ancre à une bouée."
+ }
+]

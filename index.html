@@ -759,6 +759,8 @@
     .filter-row-label { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; }
     .filter-row { display: flex; justify-content: space-between; align-items: center; margin-top: 0.75rem; margin-bottom: 0.35rem; flex-wrap: wrap; gap: 0.5rem; }
     .pill-sep { width: 1px; align-self: stretch; background: var(--border); margin: 0 0.25rem; }
+    .terme-lien { color: inherit; text-decoration: underline dotted var(--accent); text-underline-offset: 3px; cursor: pointer; }
+    .terme-lien:hover { color: var(--accent); }
     .masque { display: inline-block; min-width: 3.5em; border-bottom: 2px dashed var(--accent); color: transparent; user-select: none; }
     .sens-tag { font-size: 0.7rem; color: var(--text-muted); }
     .lex-item-niveau { font-size: 0.7rem; color: var(--star); margin-left: 0.4rem; }
@@ -1000,10 +1002,66 @@
       return t;
     }
 
+    // Liens vers le glossaire : chaque mot du glossaire cité dans un texte devient cliquable
+    const FORMES_GLOSSAIRE = new Map();   // forme en minuscules → id du terme
+    for (const g of GLOSSAIRE) {
+      for (const m of g.masques) FORMES_GLOSSAIRE.set(m.toLowerCase(), g.id);
+    }
+    const RE_GLOSSAIRE = new RegExp('(?<![\\p{L}])('
+      + [...FORMES_GLOSSAIRE.keys()].sort((a, b) => b.length - a.length).map(echapperRegex).join('|')
+      + ')(s|x)?(?![\\p{L}])', 'giu');
+
+    // Emplois courants qui ne désignent pas le terme du glossaire (« à travers », « dû au vent »…)
+    const FAUX_AMIS = {
+      'au-vent': /(dûe?|due|rapport|opposée?|face|exposée?|combinée?)\s+$/i,
+      travers: /(^|[^\p{L}])à\s+$/iu,
+      derive: /bateau\s+$/i,
+    };
+
+    // html : texte à enrichir ; exclure : id du terme à ne pas lier (celui de la carte)
+    function lierGlossaire(html, exclure) {
+      const conteneur = document.createElement('div');
+      conteneur.innerHTML = html;
+      const marcheur = document.createTreeWalker(conteneur, NodeFilter.SHOW_TEXT);
+      const noeuds = [];
+      while (marcheur.nextNode()) noeuds.push(marcheur.currentNode);
+      for (const noeud of noeuds) {
+        if (noeud.parentElement.closest('.masque, .terme-lien')) continue;
+        const texte = noeud.nodeValue;
+        RE_GLOSSAIRE.lastIndex = 0;
+        const fragment = document.createDocumentFragment();
+        let dernier = 0, trouve = false, m;
+        while ((m = RE_GLOSSAIRE.exec(texte))) {
+          const id = FORMES_GLOSSAIRE.get(m[1].toLowerCase());
+          if (!id || id === exclure) continue;
+          if (FAUX_AMIS[id] && FAUX_AMIS[id].test(texte.slice(0, m.index))) continue;
+          trouve = true;
+          fragment.append(texte.slice(dernier, m.index));
+          const lien = document.createElement('span');
+          lien.className = 'terme-lien';
+          lien.dataset.terme = id;
+          lien.title = 'Voir la définition';
+          lien.textContent = m[0];
+          fragment.append(lien);
+          dernier = m.index + m[0].length;
+        }
+        if (!trouve) continue;
+        fragment.append(texte.slice(dernier));
+        noeud.replaceWith(fragment);
+      }
+      return conteneur.innerHTML;
+    }
+    document.addEventListener('click', e => {
+      const lien = e.target.closest('.terme-lien');
+      if (!lien) return;
+      e.stopPropagation();
+      ouvrirTerme(lien.dataset.terme);
+    });
+
     const CARTES = [];
     for (const g of GLOSSAIRE) {
       CARTES.push({
-        id: `g-${g.id}-def`, section: 'glossaire', theme: g.theme, niveau: g.niveau, sens: 'def', star: g.niveau === 3,
+        id: `g-${g.id}-def`, terme: g.id, section: 'glossaire', theme: g.theme, niveau: g.niveau, sens: 'def', star: g.niveau === 3,
         consigne: 'Mot → définition',
         q: `Que signifie « <strong>${g.terme}</strong> » ?`,
         a: g.definition,
@@ -1011,7 +1069,7 @@
       });
       if (g.niveau === 3) {
         CARTES.push({
-          id: `g-${g.id}-mot`, section: 'glossaire', theme: g.theme, niveau: g.niveau, sens: 'mot', star: true,
+          id: `g-${g.id}-mot`, terme: g.id, section: 'glossaire', theme: g.theme, niveau: g.niveau, sens: 'mot', star: true,
           consigne: 'Définition → mot',
           q: `Quel est le terme ?<br><br>${masquer(g.definition, g.masques)}`,
           a: `<strong>${g.terme}</strong>`,
@@ -1277,8 +1335,8 @@
       badge.innerText = ['⚪ Nouvelle', '❌ À revoir', '🟡 Hésitant', '✅ Maîtrisé'][st];
 
       document.getElementById('carte-consigne').innerText = c.consigne;
-      document.getElementById('carte-q').innerHTML = c.q;
-      document.getElementById('carte-a').innerHTML = c.a;
+      document.getElementById('carte-q').innerHTML = lierGlossaire(c.q, c.terme);
+      document.getElementById('carte-a').innerHTML = lierGlossaire(c.a, c.terme);
       document.getElementById('carte-source').innerText = c.source ? 'Source : ' + c.source : '';
 
       revele = false;
@@ -1360,7 +1418,7 @@
       document.getElementById('terme-theme').innerText = THEMES[g.theme];
       document.getElementById('terme-nom').innerText = g.terme;
       document.getElementById('terme-niveau').innerText = NIVEAUX[g.niveau];
-      document.getElementById('terme-definition').innerHTML = g.definition;
+      document.getElementById('terme-definition').innerHTML = lierGlossaire(g.definition, g.id);
       document.getElementById('lex-modal').style.display = 'flex';
     }
     function fermerTerme() { document.getElementById('lex-modal').style.display = 'none'; }
@@ -1427,6 +1485,7 @@
       if (e.key === 'Escape') { fermerTerme(); fermerGlossaire(); return; }
       if (e.target.tagName === 'INPUT') return;
       if (document.getElementById('lexicon-browser-modal').style.display === 'flex') return;
+      if (document.getElementById('lex-modal').style.display === 'flex') return;
       if (e.key === ' ' || e.code === 'Space') {
         e.preventDefault();
         if (!revele) revelerReponse(); else carteSuivante();

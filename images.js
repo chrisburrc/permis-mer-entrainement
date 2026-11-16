@@ -651,5 +651,12 @@ const IMAGES = {
   "licence": "CC BY-SA 4.0",
   "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
   "page": "https://commons.wikimedia.org/wiki/File:Anchor_trip_line_and_buoy.svg"
+ },
+ "allures-de-pres": {
+  "src": "images/allures-a-la-voile.jpg",
+  "auteur": "Tibboh",
+  "licence": "CC BY-SA 4.0",
+  "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+  "page": "https://commons.wikimedia.org/wiki/File:Allures_%C3%A0_la_voile.svg"
  }
 };

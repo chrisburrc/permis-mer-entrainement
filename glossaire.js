@@ -167,7 +167,7 @@ const GLOSSAIRE = [
   "masques": [
    "allure"
   ],
-  "definition": "Angle de la route du bateau par rapport au vent.",
+  "definition": "Angle de la route du bateau par rapport au vent. De la plus proche à la plus éloignée du vent : près, bon plein, travers, largue, grand largue, vent arrière.",
   "niveau": 3,
   "theme": "vent"
  },
@@ -227,7 +227,7 @@ const GLOSSAIRE = [
   "masques": [
    "près serré"
   ],
-  "definition": "Près au plus proche possible du vent.",
+  "definition": "Allure la plus proche possible du lit du vent : on serre le vent au maximum, juste avant que les voiles ne faseyent.",
   "niveau": 3,
   "theme": "vent"
  },
@@ -258,7 +258,7 @@ const GLOSSAIRE = [
   "masques": [
    "adonner"
   ],
-  "definition": "Le vent adonne quand il tourne vers l'arrière du bateau : il devient plus favorable. Contraire : refuser.",
+  "definition": "Pour le vent : tourner vers l'arrière du bateau. Il devient plus favorable : au près, on peut se rapprocher de la route voulue. Contraire : refuser.",
   "niveau": 3,
   "theme": "vent"
  },
@@ -268,7 +268,7 @@ const GLOSSAIRE = [
   "masques": [
    "refuser"
   ],
-  "definition": "Le vent refuse quand il tourne vers l'avant du bateau : il devient moins favorable. Contraire : adonner.",
+  "definition": "Pour le vent : tourner vers l'avant du bateau. Il devient moins favorable : au près, il faut abattre pour garder les voiles pleines. Contraire : adonner.",
   "niveau": 3,
   "theme": "vent"
  },
@@ -308,7 +308,7 @@ const GLOSSAIRE = [
   "masques": [
    "faseyer"
   ],
-  "definition": "Une voile faseye quand elle bat et ne porte plus (trop choquée ou trop près du vent).",
+  "definition": "Pour une voile : battre et onduler au vent sans se gonfler, donc sans propulser le bateau (voile trop choquée, ou bateau trop près du vent).",
   "niveau": 3,
   "theme": "vent"
  },
@@ -849,7 +849,7 @@ const GLOSSAIRE = [
   "masques": [
    "coulisseau"
   ],
-  "definition": "Petite pièce cousue sur la grand-voile, qui coulisse dans la gorge du mât.",
+  "definition": "Petite pièce cousue le long du guindant de la grand-voile, qui glisse dans la rainure (gorge) du mât.",
   "niveau": 2,
   "theme": "voiles"
  },
@@ -959,7 +959,7 @@ const GLOSSAIRE = [
   "masques": [
    "abattée"
   ],
-  "definition": "Mouvement du bateau qui abat.",
+  "definition": "Rotation du bateau qui éloigne son avant du lit du vent (volontaire ou non). Contraire : aulofée.",
   "niveau": 2,
   "theme": "voiles"
  },
@@ -967,10 +967,10 @@ const GLOSSAIRE = [
   "id": "aulofee",
   "terme": "aulofée (ou oloffée)",
   "masques": [
-   "oloffée",
-   "aulofée"
+   "aulofée",
+   "oloffée"
   ],
-  "definition": "Mouvement, souvent involontaire, du bateau qui lofe.",
+  "definition": "Rotation, souvent brutale et involontaire (rafale, vague), qui ramène l'avant du bateau vers le lit du vent. Contraire : abattée.",
   "niveau": 2,
   "theme": "voiles"
  },
@@ -1190,7 +1190,7 @@ const GLOSSAIRE = [
   "masques": [
    "crocher"
   ],
-  "definition": "L'ancre croche : elle s'accroche au fond.",
+  "definition": "Pour une ancre : s'enfoncer dans le fond et y tenir, ce qui immobilise le bateau.",
   "niveau": 2,
   "theme": "mouillage"
  },
@@ -1340,7 +1340,7 @@ const GLOSSAIRE = [
   "masques": [
    "rappel"
   ],
-  "definition": "(1) L'équipage se met au vent pour redresser le bateau. (2) En régate, rappel d'un départ anticipé.",
+  "definition": "(1) Position de l'équipage assis ou penché à l'extérieur du bord au vent, pour redresser le bateau. (2) En régate, signal qui oblige un bateau parti trop tôt à revenir derrière la ligne de départ.",
   "niveau": 2,
   "theme": "bateau"
  },
@@ -1350,7 +1350,7 @@ const GLOSSAIRE = [
   "masques": [
    "resaler"
   ],
-  "definition": "Redresser un bateau qui a dessalé.",
+  "definition": "Remettre sur sa coque un dériveur chaviré.",
   "niveau": 2,
   "theme": "bateau"
  },
@@ -1470,7 +1470,18 @@ const GLOSSAIRE = [
   "masques": [
    "allures portantes"
   ],
-  "definition": "Largue, grand largue, vent arrière.",
+  "definition": "Groupe d'allures où le vent vient de l'arrière du travers (plus de 90°) : largue, grand largue, vent arrière. Contraire : allures de près.",
+  "niveau": 3,
+  "theme": "vent"
+ },
+ {
+  "id": "allures-de-pres",
+  "terme": "allures de près (ou remontantes)",
+  "masques": [
+   "allures de près",
+   "remontantes"
+  ],
+  "definition": "Groupe d'allures où le vent vient de l'avant du travers (moins de 90°) : près serré, près, bon plein. On remonte vers le vent. Contraire : allures portantes.",
   "niveau": 3,
   "theme": "vent"
  },

@@ -811,7 +811,7 @@
       <div id="filtres-glossaire">
         <div class="filter-row"><span class="filter-row-label">Thème du glossaire</span></div>
         <div class="filter-pills" id="pills-theme"></div>
-        <div class="filter-row"><span class="filter-row-label">Niveau et sens</span></div>
+        <div class="filter-row" id="ligne-sens"><span class="filter-row-label">Sens</span></div>
         <div class="filter-pills" id="pills-niveau"></div>
       </div>
 
@@ -962,6 +962,7 @@
       </div>
       <div class="lex-browser-body">
         <input type="text" id="recherche-glossaire" class="search-bar" placeholder="🔍 Chercher un terme ou une définition…" oninput="afficherGlossaire()">
+        <div class="filter-pills" id="pills-glossaire-niveau"></div>
         <div class="filter-pills" id="pills-glossaire"></div>
         <div style="font-size: 0.8rem; color: var(--text-muted);" id="glossaire-compte"></div>
         <div class="lex-grid" id="grille-glossaire"></div>
@@ -984,7 +985,7 @@
       mouillage:  '⚓ Mouillage',
       maree:      '🌗 Marée',
     };
-    const NIVEAUX = { 3: '★★★ Essentiel', 2: '★★ Utile' };
+    const NIVEAUX = { 3: '★★★ Essentiels', 2: '★★ Autres mots' };
     const CLE_STOCKAGE = 'permis_mer_evaluations';
 
     function echapperRegex(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); }
@@ -1046,6 +1047,7 @@
     let vueListe = false;
     let carteCourante = null;
     let categorieGlossaire = 'all';
+    let niveauGlossaire = 'all';
 
     let evaluations = {};
     try { evaluations = JSON.parse(localStorage.getItem(CLE_STOCKAGE) || '{}'); } catch (e) { evaluations = {}; }
@@ -1064,7 +1066,12 @@
     function afficherPills() {
       const parSection = id => CARTES.filter(c => c.section === id).length;
       let h = pill(`🔘 Tout (${CARTES.length})`, filtreSection === 'all', "choisirSection('all')");
-      for (const s of SECTIONS_APP) {
+      const parNiveau = n => CARTES.filter(c => c.section === 'glossaire' && c.niveau === n).length;
+      for (const n of [3, 2]) {
+        h += pill(`📖 Glossaire ${NIVEAUX[n]} (${parNiveau(n)})`,
+          filtreSection === 'glossaire' && filtreNiveau === n, `choisirGlossaire(${n})`);
+      }
+      for (const s of SECTIONS) {
         h += pill(`${s.icone || ''} ${s.nom} (${parSection(s.id)})`, filtreSection === s.id, `choisirSection('${s.id}')`);
       }
       h += pill(`⭐ Prioritaires (${CARTES.filter(c => c.star).length})`, filtreSection === 'star', "choisirSection('star')");
@@ -1077,18 +1084,18 @@
       document.getElementById('filtres-glossaire').style.display = glossaireVisible ? 'block' : 'none';
       if (!glossaireVisible) return;
 
-      const gl = CARTES.filter(c => c.section === 'glossaire');
+      const gl = CARTES.filter(c => c.section === 'glossaire' && (filtreNiveau === 'all' || c.niveau === filtreNiveau));
       let t = pill(`Tous (${gl.length})`, filtreTheme === 'all', "choisirTheme('all')");
       for (const [id, nom] of Object.entries(THEMES)) {
         t += pill(`${nom} (${gl.filter(c => c.theme === id).length})`, filtreTheme === id, `choisirTheme('${id}')`);
       }
       document.getElementById('pills-theme').innerHTML = t;
 
-      let n = pill('Tous niveaux', filtreNiveau === 'all', "choisirNiveau('all')");
-      n += pill(NIVEAUX[3], filtreNiveau === 3, 'choisirNiveau(3)');
-      n += pill(NIVEAUX[2], filtreNiveau === 2, 'choisirNiveau(2)');
-      n += '<span class="pill-sep"></span>';
-      n += pill('Les deux sens', filtreSens === 'all', "choisirSens('all')");
+      // les mots ★★ n'existent que dans le sens mot → définition
+      const sensVisible = filtreNiveau !== 2;
+      document.getElementById('ligne-sens').style.display = sensVisible ? '' : 'none';
+      document.getElementById('pills-niveau').style.display = sensVisible ? '' : 'none';
+      let n = pill('Les deux sens', filtreSens === 'all', "choisirSens('all')");
       n += pill('Mot → définition', filtreSens === 'def', "choisirSens('def')");
       n += pill('Définition → mot', filtreSens === 'mot', "choisirSens('mot')");
       document.getElementById('pills-niveau').innerHTML = n;
@@ -1099,8 +1106,12 @@
       if (s !== 'glossaire') { filtreTheme = 'all'; filtreNiveau = 'all'; filtreSens = 'all'; }
       appliquerFiltres();
     }
+    function choisirGlossaire(n) {
+      filtreSection = 'glossaire'; filtreNiveau = n; filtreTheme = 'all';
+      if (n === 2) filtreSens = 'all';
+      appliquerFiltres();
+    }
     function choisirTheme(t) { filtreTheme = t; appliquerFiltres(); }
-    function choisirNiveau(n) { filtreNiveau = n; appliquerFiltres(); }
     function choisirSens(s) { filtreSens = s; appliquerFiltres(); }
     function filtrerStatut(s) { filtreStatut = s; appliquerFiltres(); }
     function reinitialiserFiltres() {
@@ -1360,6 +1371,7 @@
     }
     function fermerGlossaire() { document.getElementById('lexicon-browser-modal').style.display = 'none'; }
     function choisirCategorieGlossaire(c) { categorieGlossaire = c; afficherGlossaire(); }
+    function choisirNiveauGlossaire(n) { niveauGlossaire = n; afficherGlossaire(); }
 
     function afficherGlossaire() {
       let p = pill(`Tous (${GLOSSAIRE.length})`, categorieGlossaire === 'all', "choisirCategorieGlossaire('all')");
@@ -1367,10 +1379,15 @@
         p += pill(nom, categorieGlossaire === id, `choisirCategorieGlossaire('${id}')`);
       }
       document.getElementById('pills-glossaire').innerHTML = p;
+      const parNiveau = n => GLOSSAIRE.filter(g => g.niveau === n).length;
+      let pn = pill('Tous niveaux', niveauGlossaire === 'all', "choisirNiveauGlossaire('all')");
+      for (const n of [3, 2]) pn += pill(`${NIVEAUX[n]} (${parNiveau(n)})`, niveauGlossaire === n, `choisirNiveauGlossaire(${n})`);
+      document.getElementById('pills-glossaire-niveau').innerHTML = pn;
 
       const requete = (document.getElementById('recherche-glossaire').value || '').toLowerCase().trim();
       const entrees = GLOSSAIRE.filter(g => {
         if (categorieGlossaire !== 'all' && g.theme !== categorieGlossaire) return false;
+        if (niveauGlossaire !== 'all' && g.niveau !== niveauGlossaire) return false;
         return !requete || (g.terme + ' ' + texteBrut(g.definition)).toLowerCase().includes(requete);
       }).sort((a, b) => a.terme.localeCompare(b.terme, 'fr'));
 
